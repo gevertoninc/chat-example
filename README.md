@@ -2,6 +2,11 @@
 
 This is a simple project to train web socket implementation
 
+## How to start
+
+- Run `npm i` to install dependencies
+- Run `node index.js` to start server
+
 ## TODO
 
 Here are some ideas to improve the application:
