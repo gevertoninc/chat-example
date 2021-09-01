@@ -10,13 +10,18 @@
       <input id="input" autocapitalize="off" />
       <button>Vai</button>
     </form>
-    <script src="socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
     <script>
-      let socket = io();
+      const socket = io('ws://localhost:3001', {
+        auth: {
+          token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+        }
+      });
 
-      let messages = document.getElementById('messages');
-      let form = document.getElementById('form');
-      let input = document.getElementById('input');
+      const messages = document.getElementById('messages');
+      const form = document.getElementById('form');
+      const input = document.getElementById('input');
 
       form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -26,6 +31,11 @@
 
           input.value = '';
         }
+      });
+
+      socket.emit('events', {
+        name: 'Potato',
+        age: 71
       });
 
       socket.on('chat message', function(message) {
