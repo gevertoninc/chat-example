@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
     <!-- <script src="/socket.io/socket.io.js"></script> -->
     <script>
-      const socket = io('ws://localhost:3001', {
+      const socket = io('ws://localhost:3006', {
         auth: {
           token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
         }
@@ -33,12 +33,17 @@
         }
       });
 
-      socket.emit('events', {
+      socket.emit('start-onboarding', {
         name: 'Potato',
         age: 71
       });
 
-      socket.on('chat message', function(message) {
+      socket.on('connect', function() {
+        console.warn('socket', socket);
+      });
+
+      socket.on('start-onboarding', function(message) {
+        console.warn('message', message)
         let item = document.createElement('li');
 
         item.textContent = message;
